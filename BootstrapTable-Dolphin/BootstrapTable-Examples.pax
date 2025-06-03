@@ -8,6 +8,8 @@ A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://boot
 
 SmalltalkSystem current openUrl: ''http://localhost:8080/bootstrap-table/'''.
 
+package basicScriptAt: #postinstall put: 'SmalltalkSystem current openUrl: ''http://localhost:8080/bootstrap-table/'''.
+
 package classNames
 	add: #SBSBootstrapColumnGroupsExample;
 	add: #SBSBootstrapDetailComponentExample;

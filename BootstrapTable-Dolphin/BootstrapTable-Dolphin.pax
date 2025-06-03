@@ -14,10 +14,10 @@ package globalAliases: (Set new
 	yourself).
 
 package setPrerequisites: #(
-	'BootstrapTable-Core').
+	'BootstrapTable-Examples').
 
 package setManualPrerequisites: #(
-	'BootstrapTable-Core').
+	'BootstrapTable-Examples').
 
 package!
 
