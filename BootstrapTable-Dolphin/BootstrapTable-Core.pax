@@ -1,0 +1,160 @@
+﻿| package |
+package := Package name: 'BootstrapTable-Core'.
+package paxVersion: 1;
+	basicComment: 'BootstrapTable-Dolphin
+https://github.com/rko281/BootstrapTable-Dolphin
+
+A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://bootstrap-table.com)
+'.
+
+package classNames
+	add: #SBSIconsCDNDeploymentLibrary;
+	add: #SBSJQueryCDNDeploymentLibrary;
+	add: #SBSTable;
+	add: #SBSTableCDNDeploymentLibrary;
+	add: #SBSTableCheckBox;
+	add: #SBSTableColumn;
+	add: #SBSTableColumnComponent;
+	add: #SBSTableColumnGroup;
+	add: #SBSTableCoreComponent;
+	add: #SBSTableRootComponent;
+	add: #SBSTableRowSelector;
+	add: #SBSTableSingleColumn;
+	add: #SBSTableSubComponent;
+	yourself.
+
+package methodNames
+	add: #Symbol -> #asHtmlTagDataAttribute;
+	yourself.
+
+package binaryGlobalNames: (Set new
+	yourself).
+
+package globalAliases: (Set new
+	yourself).
+
+package setPrerequisites: #(
+	'..\Seaside-Bootstrap5\Bootstrap5-Core'
+	'BootstrapTable-Javascript'
+	'..\Core\Object Arts\Dolphin\Base\Dolphin'
+	'..\Seaside\Javascript\Javascript-Core'
+	'..\Seaside\Seaside\Seaside-Canvas'
+	'..\Seaside\Seaside\Seaside-Core'
+	'..\Seaside\Seaside\Seaside-JSON-Core'
+	'..\Seaside\Seaside\Seaside-Tests-Core'
+	'..\Seaside\Seaside\Seaside-Tools-Core').
+
+package setManualPrerequisites: #(
+	'BootstrapTable-Javascript').
+
+package!
+
+"Class Definitions"!
+
+SBSCDNDeploymentLibrary subclass: #SBSIconsCDNDeploymentLibrary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSCDNDeploymentLibrary subclass: #SBSJQueryCDNDeploymentLibrary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSCDNDeploymentLibrary subclass: #SBSTableCDNDeploymentLibrary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSComponent subclass: #SBSTableCoreComponent
+	instanceVariableNames: 'id options'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSComponent subclass: #SBSTableSubComponent
+	instanceVariableNames: 'model table column'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSRootComponent subclass: #SBSTableRootComponent
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableCoreComponent subclass: #SBSTable
+	instanceVariableNames: 'components columns list searchString sortColumn sortDirection data dataStream detailComponentGenerator pageNum pageSize selections hostCanvas rowsById rowsByIndex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableCoreComponent subclass: #SBSTableColumnComponent
+	instanceVariableNames: 'parentGroup table label'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableColumnComponent subclass: #SBSTableColumnGroup
+	instanceVariableNames: 'components'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableColumnComponent subclass: #SBSTableSingleColumn
+	instanceVariableNames: 'getContentsBlock fieldName sortBlock footerBlock'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSingleColumn subclass: #SBSTableColumn
+	instanceVariableNames: 'renderBlock componentGenerator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSingleColumn subclass: #SBSTableRowSelector
+	instanceVariableNames: 'enablementBlock'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSubComponent subclass: #SBSTableCheckBox
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+"Loose Methods"!
+
+!Symbol methodsFor!
+
+asHtmlTagDataAttribute
+
+	"e.g. #sortStable -> 'data-sort-stable'"
+
+	| in out |
+
+	in := self readStream.
+	out := (String new: self size + 8) writeStream.
+
+	out nextPutAll: 'data-'.
+	[in atEnd] whileFalse: 
+		[| next |
+		next := in next.
+		next isUppercase
+			ifTrue: [out nextPut: $-; nextPut: next asLowercase]
+			ifFalse: [out nextPut: next]].
+
+	^out contents! !
+
+!Symbol categoriesForMethods!
+asHtmlTagDataAttribute!converting!public! !
+!
+
+"End of package definition"!
+

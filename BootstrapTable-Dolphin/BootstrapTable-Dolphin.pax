@@ -1,0 +1,25 @@
+﻿| package |
+package := Package name: 'BootstrapTable-Dolphin'.
+package paxVersion: 1;
+	basicComment: 'BootstrapTable-Dolphin
+https://github.com/rko281/BootstrapTable-Dolphin
+
+A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://bootstrap-table.com)
+'.
+
+package binaryGlobalNames: (Set new
+	yourself).
+
+package globalAliases: (Set new
+	yourself).
+
+package setPrerequisites: #(
+	'BootstrapTable-Core').
+
+package setManualPrerequisites: #(
+	'BootstrapTable-Core').
+
+package!
+
+"End of package definition"!
+

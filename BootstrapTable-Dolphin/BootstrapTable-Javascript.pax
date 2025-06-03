@@ -1,0 +1,148 @@
+﻿| package |
+package := Package name: 'BootstrapTable-Javascript'.
+package paxVersion: 1;
+	basicComment: 'BootstrapTable-Dolphin
+https://github.com/rko281/BootstrapTable-Dolphin
+
+A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://bootstrap-table.com)
+'.
+
+package classNames
+	add: #JQueryBootstrapTable;
+	add: #JSNamedFunction;
+	yourself.
+
+package methodNames
+	add: #JQueryClass -> #bootstrapTable:;
+	add: #JQueryInstance -> #as:;
+	add: #JQueryInstance -> #newCopy;
+	add: #JQueryInstance -> #resetDecoration;
+	add: #JSFunction -> #addExpression:;
+	add: #JSFunction -> #returnExpression:;
+	add: #JSFunction -> #returnStatement:;
+	add: 'JQueryInstance class' -> #fromJQueryInstance:;
+	add: 'JSFunction class' -> #named:;
+	add: 'JSFunction class' -> #named:arguments:;
+	yourself.
+
+package binaryGlobalNames: (Set new
+	yourself).
+
+package globalAliases: (Set new
+	yourself).
+
+package setPrerequisites: #(
+	'..\Core\Object Arts\Dolphin\Base\Dolphin'
+	'..\Seaside\Javascript\Javascript-Core'
+	'..\Seaside\JQuery\JQuery-Core').
+
+package!
+
+"Class Definitions"!
+
+JQueryInstance subclass: #JQueryBootstrapTable
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+JSFunction subclass: #JSNamedFunction
+	instanceVariableNames: 'name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+"Loose Methods"!
+
+!JQueryClass methodsFor!
+
+bootstrapTable: aString
+
+	^(self id: aString) as: JQueryBootstrapTable! !
+
+!JQueryClass categoriesForMethods!
+bootstrapTable:!convenience!public! !
+!
+
+!JQueryInstance methodsFor!
+
+as: aJQueryInstanceSubclass
+
+	^aJQueryInstanceSubclass fromJQueryInstance: self!
+
+newCopy
+
+	"Answer a new, undecorated, copy of the receiver ready for a new statement"
+
+	^self copy
+		resetDecoration;
+		yourself!
+
+resetDecoration
+
+	decoration := self! !
+
+!JQueryInstance categoriesForMethods!
+as:!converting!public! !
+newCopy!copying!public! !
+resetDecoration!initialization!private! !
+!
+
+!JQueryInstance class methodsFor!
+
+fromJQueryInstance: aJQueryInstance
+
+	| instance |
+
+	instance := self new.
+	1 to: JQueryInstance instSize do: [ :index | instance instVarAt: index put: (aJQueryInstance instVarAt: index)].
+	^instance! !
+
+!JQueryInstance class categoriesForMethods!
+fromJQueryInstance:!instance creation!public! !
+!
+
+!JSFunction methodsFor!
+
+addExpression: aString
+
+	self add: (JSStream on: aString)!
+
+returnExpression: aString
+
+	self returnStatement: (JSStream on: aString)!
+
+returnStatement: anObject
+
+	"Must be sent after all other statements have been added"
+
+	self 
+		return: true;
+		add: anObject! !
+
+!JSFunction categoriesForMethods!
+addExpression:!public! !
+returnExpression:!public! !
+returnStatement:!public! !
+!
+
+!JSFunction class methodsFor!
+
+named: aString
+
+	^self named: aString arguments: #()!
+
+named: aString arguments: anArray
+
+	^JSNamedFunction new
+		name: aString;
+		arguments: anArray;
+		yourself! !
+
+!JSFunction class categoriesForMethods!
+named:!instance creation!public! !
+named:arguments:!instance creation!public! !
+!
+
+"End of package definition"!
+

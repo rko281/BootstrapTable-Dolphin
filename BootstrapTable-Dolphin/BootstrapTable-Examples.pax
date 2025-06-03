@@ -1,0 +1,164 @@
+﻿| package |
+package := Package name: 'BootstrapTable-Examples'.
+package paxVersion: 1;
+	basicComment: 'BootstrapTable-Dolphin
+https://github.com/rko281/BootstrapTable-Dolphin
+
+A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://bootstrap-table.com)
+
+SmalltalkSystem current openUrl: ''http://localhost:8080/bootstrap-table/'''.
+
+package classNames
+	add: #SBSBootstrapColumnGroupsExample;
+	add: #SBSBootstrapDetailComponentExample;
+	add: #SBSBootstrapTableApplicationExample;
+	add: #SBSBootstrapTableApplicationExample2;
+	add: #SBSBootstrapTableEmbedDataExample;
+	add: #SBSBootstrapTableExample;
+	add: #SBSBootstrapTableExpandableExample;
+	add: #SBSBootstrapTableFetchDataExample;
+	add: #SBSBootstrapTableFooterExample;
+	add: #SBSBootstrapTableIntroExample;
+	add: #SBSBootstrapTablePaginationExample;
+	add: #SBSBootstrapTableSearchableExample;
+	add: #SBSBootstrapTableSelectableExample;
+	add: #SBSBootstrapTableServerSidePaginationExample;
+	add: #SBSBootstrapTableSortableExample;
+	add: #SBSTableExampleBrowser;
+	add: #SBSTableExampleDeleteRowComponent;
+	add: #SBSTableExampleProduct;
+	add: #SBSTableExampleProductEditor;
+	yourself.
+
+package binaryGlobalNames: (Set new
+	yourself).
+
+package globalAliases: (Set new
+	yourself).
+
+package setPrerequisites: #(
+	'..\Seaside-Bootstrap5\Bootstrap5-Core'
+	'BootstrapTable-Core'
+	'..\Core\Object Arts\Dolphin\Base\Dolphin'
+	'..\Seaside\Seaside\Seaside-Dolphin-Core').
+
+package!
+
+"Class Definitions"!
+
+Object subclass: #SBSTableExampleProduct
+	instanceVariableNames: 'id name price inStock'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSComponent subclass: #SBSBootstrapTableExample
+	instanceVariableNames: 'table'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapColumnGroupsExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableApplicationExample
+	instanceVariableNames: 'list'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableEmbedDataExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableExpandableExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableFetchDataExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableFooterExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableIntroExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTablePaginationExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableSearchableExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableSelectableExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableServerSidePaginationExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableExample subclass: #SBSBootstrapTableSortableExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSBootstrapTableApplicationExample subclass: #SBSBootstrapTableApplicationExample2
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableRootComponent subclass: #SBSTableExampleBrowser
+	instanceVariableNames: 'currentExample'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSubComponent subclass: #SBSBootstrapDetailComponentExample
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSubComponent subclass: #SBSTableExampleDeleteRowComponent
+	instanceVariableNames: 'hostApplication'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+SBSTableSubComponent subclass: #SBSTableExampleProductEditor
+	instanceVariableNames: 'fields'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+"End of package definition"!
+
