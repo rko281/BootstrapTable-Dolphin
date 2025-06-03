@@ -28,8 +28,15 @@ renderContentOn: html
 	self renderNavigationBarOn: html.
 	html row		with: [		html column: [ self renderNavigationOn: html ] mediumSize: 2.		html column: [ self renderExampleOn: html ] mediumSize: 10	]!
 
-renderExampleOn: html	currentExample ifNotNil: [		currentExample renderOn: html.		html break;break.		html heading level2; with: 'Smalltalk source code'.
-		html horizontalRule.		html preformatted style: 'width: 100%'; with: [html code dataAttributeAt: 'highlighted' put: 'yes'; with: (currentExample class methodNamed: #createTable) sourceCode].	]!
+renderExampleOn: html
+
+	currentExample ifNotNil: [
+		currentExample renderOn: html.
+		html break;break.
+		html heading level2; with: 'Smalltalk source code'.
+		html horizontalRule.
+		html preformatted style: 'width: 100%'; with: [html code dataAttributeAt: 'highlighted' put: 'yes'; with: (currentExample class compiledMethodAt: #createTable) getSource].
+	]!
 
 renderNavigationBarOn: html	 html navigationBar 
 			lightBackground;			with: 
