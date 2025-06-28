@@ -18,6 +18,7 @@ package methodNames
 	add: #JQueryInstance -> #newCopy;
 	add: #JQueryInstance -> #resetDecoration;
 	add: #JSFunction -> #addExpression:;
+	add: #JSFunction -> #named:;
 	add: #JSFunction -> #returnExpression:;
 	add: #JSFunction -> #returnStatement:;
 	add: 'JQueryInstance class' -> #fromJQueryInstance:;
@@ -108,6 +109,12 @@ addExpression: aString
 
 	self add: (JSStream on: aString)!
 
+named: aString
+
+	"Convert the receiver to a named function"
+
+	^JSNamedFunction named: aString function: self!
+
 returnExpression: aString
 
 	self returnStatement: (JSStream on: aString)!
@@ -122,6 +129,7 @@ returnStatement: anObject
 
 !JSFunction categoriesForMethods!
 addExpression:!public! !
+named:!converting!public! !
 returnExpression:!public! !
 returnStatement:!public! !
 !

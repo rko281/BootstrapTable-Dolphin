@@ -81,6 +81,9 @@ applyOptionsTo: aTable on: html
 			option: #detailView value: true;
 			option: #detailFormatter value: ('detailFormatter', self id)].
 
+	(self hasExport and: [(self hasOption: #exportTypes) not]) ifTrue: 
+		[self option: #exportTypes value: #('json' 'xml' 'png' 'csv' 'txt' 'sql' 'doc' 'excel' 'xlsx' 'pdf') asJson].
+
 	self applyOptionsTo: aTable!
 
 clickToSelect: aBoolean
@@ -245,6 +248,10 @@ hasDetailComponent
 
 	^detailComponentGenerator notNil!
 
+hasExport
+
+	^self isOption: #showExport!
+
 hasFooter
 
 	^(self isOption: #showFooter) and: [self columns anySatisfy: [ :each | each hasFooter]]!
@@ -370,9 +377,9 @@ json
 	| requestFields start size stream results footerData |
 
 	rowsByIndex := OrderedCollection new: 20.
-	self hasServerSidePagination ifFalse: [^(self data collect: [ :each | self rowDataFor: each]) asJson].
-
 	requestFields := self requestContext request queryFields.
+	(self hasServerSidePagination and: [requestFields includesKey: #offset]) ifFalse: [^(self data collect: [ :each | self rowDataFor: each]) asJson].
+
 	self hasSearch ifTrue: [self setSearchString: (requestFields at: 'search' ifAbsent: [''])].
 	start := (requestFields at: 'offset') asInteger.
 	size := (requestFields at: 'limit') asInteger.
@@ -554,7 +561,7 @@ renderClickEventHandlerOn: html
 				callback: [ :ids | self handleSelectionsChangedCallback: ids] value: (html javascript alias: 'ids');
 				yourself).
 
-	html script: function asJavascript.
+	html script: function.
 
 	jqSelf := self onClient: html.
 	handlerFunction := (jqSelf data assignLocalTo: 'rows') asFunction: #('elem').
@@ -611,7 +618,7 @@ renderDetailScriptOn: html
 				yourself);
 		returnExpression: 'html'.
 
-	html script: function asJavascript!
+	html script: function!
 
 renderPageChangeEventHandlerOn: html
 
@@ -781,6 +788,12 @@ unselectAll
 
 	^self onClient unselectAll!
 
+updateRoot: htmlRoot
+
+	super updateRoot: htmlRoot.
+
+	self hasExport ifTrue: [SBSTableExportCDNDeploymentLibrary addLoadScriptTo: htmlRoot]!
+
 updateRow: anObject
 
 	^self onClient updateRow: 
@@ -824,6 +837,7 @@ validOptions
 		#detailViewAlign
 		#detailViewByClick
 		#detailViewIcon
+		#exportTypes 
 		#escape
 		#escapeTitle
 		#filterOptions
@@ -882,6 +896,7 @@ validOptions
 		#showColumns
 		#showColumnsSearch
 		#showColumnsToggleAll
+		#showExport 
 		#showExtendedPagination
 		#showFooter
 		#showFullscreen
@@ -1015,6 +1030,7 @@ handleSelectionsChangedCallback:!callbacks!private! !
 handleSortCallback:!callbacks!private! !
 hasClientSidePagination!public!testing! !
 hasDetailComponent!public!testing! !
+hasExport!public!testing! !
 hasFooter!public!testing! !
 hasFooter:!options!public! !
 hasPagination!public!testing! !
@@ -1085,6 +1101,7 @@ sortBlock!accessing!public! !
 sortData!helpers!private! !
 sortResetsPage!public!testing! !
 unselectAll!jQuery!public! !
+updateRoot:!private!rendering! !
 updateRow:!jQuery!public! !
 urlOn:!accessing!private! !
 validOptions!options!public! !

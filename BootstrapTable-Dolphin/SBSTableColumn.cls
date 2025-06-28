@@ -1,7 +1,7 @@
 ﻿"Filed out from Dolphin Smalltalk"!
 
 SBSTableSingleColumn subclass: #SBSTableColumn
-	instanceVariableNames: 'renderBlock componentGenerator'
+	instanceVariableNames: 'formatterFunction renderBlock componentGenerator'
 	classVariableNames: ''
 	poolDictionaries: ''
 	classInstanceVariableNames: ''!
@@ -62,6 +62,36 @@ footerIsTotal
 
 	self footerBlock: [self total]!
 
+formatExpression: aString
+
+	"Simplified interface to formatterFunction.
+	aString is a Javascript expression that will be used as the result of the formatterFunction.
+	Parameters to the function are value, row, index and field as per the documentation (see link in formatterFunction)"
+
+	self formatterFunction: 
+		(JSFunction new
+			arguments: #('value' 'row' 'index' 'field');
+			returnExpression: aString;
+			yourself)!
+
+formatterFunction
+
+	"formatterFunction optionally stores a JSFunction which is used to render the value to be displayed in this column.
+	This maps to the formatter option of the column - https://bootstrap-table.com/docs/api/column-options/#formatter
+
+	This represents a client-side alternative to renderBlock for improved performance when displaying large datasets"
+
+	^formatterFunction!
+
+formatterFunction: aJSFunction
+
+	"formatterFunction optionally stores a JSFunction which is used to render the value to be displayed in this column.
+	This maps to the formatter option of the column - https://bootstrap-table.com/docs/api/column-options/#formatter
+
+	This represents a client-side alternative to renderBlock for improved performance when displaying large datasets"
+
+	formatterFunction := aJSFunction!
+
 handleFooterCallback
 
 	self requestContext respond: 
@@ -100,6 +130,10 @@ hasComponent
 
 	^componentGenerator notNil!
 
+hasFormatterFunction
+
+	^formatterFunction notNil!
+
 hasRenderBlock
 
 	^renderBlock notNil!
@@ -112,9 +146,9 @@ isSearchable
 
 	^self isOption: #searchable default: true!
 
-needsFormatterCallback
+needsFormatterScript
 
-	^self hasSubComponent!
+	^self hasFormatterFunction or: [self hasSubComponent]!
 
 renderBlock
 
@@ -138,10 +172,10 @@ renderBlock: anObject
 
 	renderBlock := anObject!
 
-renderFormatterScriptOn: html
+renderFormatterCallbackScriptOn: html
 
 	| functionName function statement |
-	
+
 	functionName := self option: #formatter.
 	function := JSFunction named: functionName arguments: #('value' 'row' 'index' 'field').
 
@@ -158,7 +192,20 @@ renderFormatterScriptOn: html
 		add: statement; 
 		returnExpression: 'html'.
 
-	html script: function asJavascript!
+	html script: function!
+
+renderFormatterFunctionOn: html
+
+	| functionName |
+
+	functionName := self option: #formatter.
+	html script: (self formatterFunction named: functionName)!
+
+renderFormatterScriptOn: html
+
+	self hasFormatterFunction
+		ifTrue: [self renderFormatterFunctionOn: html]
+		ifFalse: [self renderFormatterCallbackScriptOn: html]!
 
 total
 
@@ -173,15 +220,21 @@ componentGenerator!accessing!public! !
 componentGenerator:!accessing!public! !
 footerForData!accessing!private! !
 footerIsTotal!accessing!configuring!public! !
+formatExpression:!accessing!public! !
+formatterFunction!accessing!public! !
+formatterFunction:!accessing!public! !
 handleFooterCallback!callbacks!private! !
 handleFormatterCallbackForRowId:!callbacks!private! !
 hasComponent!public!testing! !
+hasFormatterFunction!public!testing! !
 hasRenderBlock!public!testing! !
 hasSubComponent!public!testing! !
 isSearchable!public!testing! !
-needsFormatterCallback!public!testing! !
+needsFormatterScript!public!testing! !
 renderBlock!accessing!public! !
 renderBlock:!accessing!public! !
+renderFormatterCallbackScriptOn:!private!rendering! !
+renderFormatterFunctionOn:!private!rendering! !
 renderFormatterScriptOn:!private!rendering! !
 total!accessing!public! !
 !

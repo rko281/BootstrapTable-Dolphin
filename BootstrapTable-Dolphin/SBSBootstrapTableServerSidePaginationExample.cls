@@ -20,7 +20,7 @@ createTable
 		fetchData;
 		list: self list;
 		hasPagination: true;
-		option: #height value: 600;
+		option: #showPaginationSwitch value: true;
 
 		addColumn: 
 			(SBSTableColumn new
@@ -36,7 +36,7 @@ createTable
 			(SBSTableColumn new
 				label: 'Item Price';
 				accessor: #price;
-				renderBlock: [ :html :price | html text: ('$', price displayString)];
+				formatExpression: 'value.toLocaleString(''en-US'', {style: ''currency'', currency: ''USD''})';
 				yourself);
 		yourself!
 

@@ -52,7 +52,7 @@ createTable
 		clickToSelect: true;
 		detailComponentClass: SBSTableExampleProductEditor;
 		option: #toolbar value: '#toolbar';
-		options: #(#showRefresh #showToggle #showFullscreen #showColumns #showColumnsToggleAll) value: true;
+		options: #(#showRefresh #showToggle #showFullscreen #showColumns #showColumnsToggleAll #showExport) value: true;
 
 		addRowSelector;
 		addColumn: 

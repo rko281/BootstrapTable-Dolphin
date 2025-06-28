@@ -54,7 +54,7 @@ applyOptionsTo: aTableHeading
 	self 
 		option: #field value: self fieldName;
 		option: #sortable value: self isSortable.
-	self needsFormatterCallback ifTrue: [self option: #formatter value: 'columnFormatter', self id].
+	self needsFormatterScript ifTrue: [self option: #formatter value: 'columnFormatter', self id].
 	self needsSortCallback ifTrue: [self option: #sorter value: 'columnSorter', self id].
 	self needsFooterCallback ifTrue: [self option: #footerFormatter value: 'columnFooter', self id].
 
@@ -207,7 +207,7 @@ needsFooterCallback
 
 	^footerBlock notNil and: [self table hasServerSidePagination not]!
 
-needsFormatterCallback
+needsFormatterScript
 
 	^self subclassResponsibility!
 
@@ -235,7 +235,7 @@ renderFooterScriptOn: html
 		add: statement; 
 		returnExpression: 'html'.
 
-	html script: function asJavascript!
+	html script: function!
 
 renderFormatterScriptOn: html
 
@@ -254,7 +254,7 @@ renderOn: html
 
 renderScriptsOn: html
 
-	self needsFormatterCallback ifTrue: [self renderFormatterScriptOn: html].
+	self needsFormatterScript ifTrue: [self renderFormatterScriptOn: html].
 	self needsSortCallback ifTrue: [self renderSortScriptOn: html].
 	self needsFooterCallback ifTrue: [self renderFooterScriptOn: html]!
 
@@ -275,7 +275,7 @@ renderSortScriptOn: html
 				yourself);
 		returnExpression: 'sortResult'.
 
-	html script: function asJavascript!
+	html script: function!
 
 rowSpan
 
@@ -329,7 +329,7 @@ isSearchable!public!testing! !
 isSortable!public!testing! !
 isSortable:!accessing!public! !
 needsFooterCallback!public!testing! !
-needsFormatterCallback!public!testing! !
+needsFormatterScript!public!testing! !
 needsSortCallback!public!testing! !
 renderFooterScriptOn:!private!rendering! !
 renderFormatterScriptOn:!private!rendering! !

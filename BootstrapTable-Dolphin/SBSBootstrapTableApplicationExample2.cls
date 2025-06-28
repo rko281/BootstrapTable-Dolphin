@@ -26,7 +26,7 @@ createTable
 		clickToSelect: true;
 		detailComponentClass: SBSTableExampleProductEditor;
 		option: #toolbar value: '#toolbar';
-		options: #(#showRefresh #showToggle #showFullscreen #showColumns #showColumnsToggleAll) value: true;
+		options: #(#showRefresh #showToggle #showFullscreen #showColumns #showColumnsToggleAll #showExport #showPaginationSwitch) value: true;
 
 		addRowSelector;
 		addColumn: 
@@ -49,7 +49,7 @@ createTable
 				isSortable: true;
 				alignRight;
 				footerIsTotal;
-				renderBlock: [ :html :price | html text: ('$', price displayString)];
+				formatExpression: 'value.toLocaleString(''en-US'', {style: ''currency'', currency: ''USD''})';
 				yourself);
 		addColumn: 
 			(SBSTableColumn new

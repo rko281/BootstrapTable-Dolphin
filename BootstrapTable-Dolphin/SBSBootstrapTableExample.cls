@@ -14,6 +14,10 @@ SBSBootstrapTableExample comment: ''!
 
 !SBSBootstrapTableExample methodsFor!
 
+children
+
+	^{self table}!
+
 createTable
 
 	self subclassResponsibility!
@@ -69,6 +73,7 @@ table: anObject
 	table := anObject! !
 
 !SBSBootstrapTableExample categoriesForMethods!
+children!accessing!public! !
 createTable!initialize/release!public! !
 initialize!initialize/release!public! !
 list!accessing!public! !

@@ -64,7 +64,7 @@ initialize
 
 	self beMultiSelect!
 
-needsFormatterCallback
+needsFormatterScript
 
 	^self enablementBlock notNil!
 
@@ -84,7 +84,7 @@ renderFormatterScriptOn: html
 				yourself);
 		returnExpression: '{disabled: dis}'.
 
-	html script: function asJavascript! !
+	html script: function! !
 
 !SBSTableRowSelector categoriesForMethods!
 applyOptionsTo:!options!private! !
@@ -95,7 +95,7 @@ enablementBlock:!accessing!public! !
 handleFormatterCallbackWith:!callbacks!private! !
 hasSubComponent!public!testing! !
 initialize!initialize/release!public! !
-needsFormatterCallback!public!testing! !
+needsFormatterScript!public!testing! !
 renderFormatterScriptOn:!private!rendering! !
 !
 

@@ -17,6 +17,7 @@ package classNames
 	add: #SBSTableColumnComponent;
 	add: #SBSTableColumnGroup;
 	add: #SBSTableCoreComponent;
+	add: #SBSTableExportCDNDeploymentLibrary;
 	add: #SBSTableRootComponent;
 	add: #SBSTableRowSelector;
 	add: #SBSTableSingleColumn;
@@ -69,6 +70,12 @@ SBSCDNDeploymentLibrary subclass: #SBSTableCDNDeploymentLibrary
 	poolDictionaries: ''
 	classInstanceVariableNames: ''!
 
+SBSCDNDeploymentLibrary subclass: #SBSTableExportCDNDeploymentLibrary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
 SBSComponent subclass: #SBSTableCoreComponent
 	instanceVariableNames: 'id options'
 	classVariableNames: ''
@@ -112,7 +119,7 @@ SBSTableColumnComponent subclass: #SBSTableSingleColumn
 	classInstanceVariableNames: ''!
 
 SBSTableSingleColumn subclass: #SBSTableColumn
-	instanceVariableNames: 'renderBlock componentGenerator'
+	instanceVariableNames: 'formatterFunction renderBlock componentGenerator'
 	classVariableNames: ''
 	poolDictionaries: ''
 	classInstanceVariableNames: ''!
