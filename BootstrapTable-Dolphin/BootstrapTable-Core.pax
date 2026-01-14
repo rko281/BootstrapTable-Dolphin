@@ -8,6 +8,7 @@ A Seaside component for Dolphin Smalltalk wrapping Bootstrap Table (https://boot
 '.
 
 package classNames
+	add: #JQueryBootstrapTable;
 	add: #SBSIconsCDNDeploymentLibrary;
 	add: #SBSJQueryCDNDeploymentLibrary;
 	add: #SBSTable;
@@ -25,6 +26,7 @@ package classNames
 	yourself.
 
 package methodNames
+	add: #JQueryClass -> #bootstrapTable:;
 	add: #Symbol -> #asHtmlTagDataAttribute;
 	yourself.
 
@@ -36,9 +38,10 @@ package globalAliases: (Set new
 
 package setPrerequisites: #(
 	'..\Seaside-Bootstrap5\Bootstrap5-Core'
-	'BootstrapTable-Javascript'
 	'..\Core\Object Arts\Dolphin\Base\Dolphin'
 	'..\Seaside\Javascript\Javascript-Core'
+	'..\Seaside\JQuery\JQuery-Core'
+	'..\Seaside-Extras-Dolphin\JQuery-Extras'
 	'..\Seaside\Seaside\Seaside-Canvas'
 	'..\Seaside\Seaside\Seaside-Core'
 	'..\Seaside\Seaside\Seaside-JSON-Core'
@@ -46,11 +49,17 @@ package setPrerequisites: #(
 	'..\Seaside\Seaside\Seaside-Tools-Core').
 
 package setManualPrerequisites: #(
-	'BootstrapTable-Javascript').
+	'JQuery-Extras').
 
 package!
 
 "Class Definitions"!
+
+JQueryInstance subclass: #JQueryBootstrapTable
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
 
 SBSCDNDeploymentLibrary subclass: #SBSIconsCDNDeploymentLibrary
 	instanceVariableNames: ''
@@ -137,6 +146,16 @@ SBSTableSubComponent subclass: #SBSTableCheckBox
 	classInstanceVariableNames: ''!
 
 "Loose Methods"!
+
+!JQueryClass methodsFor!
+
+bootstrapTable: aString
+
+	^(self id: aString) as: JQueryBootstrapTable! !
+
+!JQueryClass categoriesForMethods!
+bootstrapTable:!convenience!public! !
+!
 
 !Symbol methodsFor!
 
